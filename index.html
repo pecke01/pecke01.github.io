@@ -27,12 +27,12 @@
 
       </header>
       <section>
-        <h3>Creating a Native script for ElasticSearch</h3>
+        <h2>Creating a Native script for ElasticSearch</h2>
 
 <p>In this post I will give a step by step introduction to how you can create your own native scripts for ElasticSearch. This is targeted for 0.20.0 and might need some adjusting for later releases. By native in ES we mean Java. ES supports other languages as well but in this case I will show how to create a native script that is loaded on startup. In this dummy case I will make a native scripts that reverts a String field.
 </p>
 
-<p>Step 1:</p>
+<h3>Step 1:</h3>
 
 <p>Implement a class that implement NativeScriptFactory. In this class override the method newScript. I am gonna return an instance of a class called Reverted. It will take the Map params as arguments for it's constructor. </p>
 
@@ -44,7 +44,7 @@
 }
 </code></pre>
 
-<p>Step 2:</p>
+<h3>Step 2:</h3>
 
 <p>Implement the actual class that runs the script. In this case Reverted. I will give you an example of this class as well. It actually doesn't do a lot except reverts a field and returns it. My reverted class will extend the AbstractSearchScript and override the run method. It will also just get a substring of the reverted string to show that you can have several parameters to a script.</p>
 
@@ -72,7 +72,7 @@
 }
 </code></pre>
 
-<p>Step 3:</p>
+<h3>Step 3:</h3>
 
 <p>Build and pack it into a JAR File that can be loaded.</p>
 
@@ -80,14 +80,14 @@
 $ jar cf marcus-scripts-1.0.jar .\com\marcus\elasticsearch\scripts\*.class
 </code></pre>
 
-<p>Step 4:</p>
+<h3>Step 4:</h3>
 
 <p>Add config row to elasticsearch.yml.</p>
 
 <pre><code>script.native: revert.type: com.marcus.elasticsearch.scripts.CustomScriptFactory
 </code></pre>
 
-<p>Step 5:</p>
+<h3>Step 5:</h3>
 
 <p>Now we are actually done. I place the created jar in the lib folder of my local ES and start it. We can now see if it works like we intended it to do. I index a document, the famous example from the ElasticSearch webpage.</p>
 
