@@ -31,7 +31,9 @@
 <p class="meta">08 Oct 2012</p>
 
 <div class="post">
-<p>In this post I will give a step by step introduction to how you can create your own native scripts for ElasticSearch. This is targeted for <code>0.20.0</code> and might need some adjusting for later releases. By native in ES we mean Java. ES supports other languages as well but in this case I will show how to create a native script that is loaded on startup. In this dummy case I will make a native scripts that reverts a String field.</p>
+<p>In this post I will give a step by step introduction to how you can create your own native scripts for ElasticSearch. This is targeted for <code>0.20.0</code> and might need some adjusting for later releases.</p>
+
+<p>By native in ES we mean Java. ES supports other languages as well but in this case I will show how to create a native script that is loaded on startup. In this dummy case I will make a native scripts that reverts a String field.</p>
 <h3>Step 1:</h3>
 <p>Implement a class that implement NativeScriptFactory. In this class override the method newScript. I am gonna return an instance of a class called Reverted. It will take the Map params as arguments for it&#8217;s constructor.</p>
 <div class='highlight'><pre><code class='java'><span class='kd'>public</span> <span class='kd'>class</span> <span class='nc'>CustomScriptFactory</span> <span class='kd'>implements</span> <span class='n'>NativeScriptFactory</span> <span class='o'>{</span>
