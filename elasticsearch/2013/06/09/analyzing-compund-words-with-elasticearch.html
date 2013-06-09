@@ -43,28 +43,27 @@
 <h2>Compound example in elasticsearch</h2>
 <p>In elasticsearch the lucene <code>DictionaryCompoundWordTokenFilter</code> maps directly to <code>dictionary_decompounder</code> which have can take a number of parameters. One of these are <code>word_list</code> which we will use in the example to provide a list of words. First we need to create a index that supports the use of this <code>TokenFilter</code>. I have a settings file that looks like this:</p>
 <div class='highlight'><pre><code class='json'><span class='p'>{</span>
-    <span class='nt'>&quot;settings&quot;</span><span class='p'>:</span> <span class='p'>{</span>
+    <span class='nt'>&quot;settings&quot;</span> <span class='p'>:</span> <span class='p'>{</span>
         <span class='nt'>&quot;index&quot;</span><span class='p'>:</span> <span class='p'>{</span>
             <span class='nt'>&quot;number_of_shards&quot;</span><span class='p'>:</span> <span class='mi'>1</span><span class='p'>,</span>
             <span class='nt'>&quot;number_of_replicas&quot;</span><span class='p'>:</span> <span class='mi'>0</span>
         <span class='p'>},</span>
         <span class='nt'>&quot;analysis&quot;</span><span class='p'>:</span> <span class='p'>{</span>
             <span class='nt'>&quot;analyzer&quot;</span><span class='p'>:</span> <span class='p'>{</span>
-                <span class='nt'>&quot;marcusswedish&quot;</span><span class='p'>:</span> <span class='p'>{</span>
-                    <span class='nt'>&quot;type&quot;</span><span class='p'>:</span> <span class='s2'>&quot;custom&quot;</span><span class='p'>,</span>
-                    <span class='nt'>&quot;tokenizer&quot;</span><span class='p'>:</span> <span class='s2'>&quot;standard&quot;</span><span class='p'>,</span>
-                    <span class='nt'>&quot;filter&quot;</span><span class='p'>:</span> <span class='p'>[</span>
-                        <span class='s2'>&quot;swedishTokenFilter&quot;</span>
-                    <span class='p'>]</span>
+                <span class='nt'>&quot;marcusswedish&quot;</span> <span class='p'>:{</span>
+                    <span class='nt'>&quot;type&quot;</span> <span class='p'>:</span> <span class='s2'>&quot;custom&quot;</span><span class='p'>,</span>
+                    <span class='nt'>&quot;tokenizer&quot;</span> <span class='p'>:</span> <span class='s2'>&quot;standard&quot;</span><span class='p'>,</span>
+                    <span class='nt'>&quot;filter&quot;</span> <span class='p'>:</span> <span class='p'>[</span><span class='s2'>&quot;swedishTokenFilter&quot;</span><span class='p'>]</span>
                 <span class='p'>}</span>
+
             <span class='p'>},</span>
             <span class='nt'>&quot;filter&quot;</span><span class='p'>:</span> <span class='p'>{</span>
-                <span class='nt'>&quot;swedishTokenFilter&quot;</span><span class='p'>:</span> <span class='p'>{</span>
-                    <span class='nt'>&quot;type&quot;</span><span class='p'>:</span> <span class='s2'>&quot;dictionary_decompounder&quot;</span><span class='p'>,</span>
-                    <span class='nt'>&quot;word_list&quot;</span><span class='p'>:</span> <span class='s2'>&quot;[fot, boll, lag]&quot;</span><span class='p'>,</span>
-                    <span class='nt'>&quot;min_subword_size&quot;</span><span class='p'>:</span> <span class='mi'>3</span>
+                <span class='nt'>&quot;swedishTokenFilter&quot;</span> <span class='p'>:</span> <span class='p'>{</span>
+                    <span class='nt'>&quot;type&quot;</span> <span class='p'>:</span> <span class='s2'>&quot;dictionary_decompounder&quot;</span><span class='p'>,</span>
+                    <span class='nt'>&quot;word_list&quot;</span> <span class='p'>:</span> <span class='p'>[</span><span class='s2'>&quot;fotboll&quot;</span><span class='p'>,</span> <span class='s2'>&quot;fot&quot;</span><span class='p'>,</span> <span class='s2'>&quot;lag&quot;</span><span class='p'>,</span> <span class='s2'>&quot;boll&quot;</span><span class='p'>],</span>
+                    <span class='nt'>&quot;min_subword_size&quot;</span> <span class='p'>:</span> <span class='mi'>2</span>
                 <span class='p'>}</span>
-            <span class='p'>}</span>
+            <span class='p'>}</span>            
         <span class='p'>}</span>
     <span class='p'>}</span>
 <span class='p'>}</span>
